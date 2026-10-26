@@ -1,0 +1,80 @@
+{
+  "name": "p2web",
+  "productName": "P2Web",
+  "version": "1.4.0",
+  "description": "Navegador e hospedagem de sites P2P",
+  "author": "P2Web",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "keygen": "node tools/keygen.js",
+    "update": "node tools/make-update.js"
+  },
+  "dependencies": {
+    "hyperswarm": "^4.8.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "rcedit": "^4.0.1"
+  },
+  "build": {
+    "appId": "com.p2web.app",
+    "productName": "P2Web",
+    "icon": "build/icon.png",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "core.js",
+      "preload.js",
+      "shell.html",
+      "home.html",
+      "update-pub.txt",
+      "package.json",
+      "build/icon.png"
+    ],
+    "asarUnpack": [
+      "**/*.node",
+      "**/prebuilds/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "signAndEditExecutable": false
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "target": "AppImage",
+      "category": "Network"
+    },
+    "mac": {
+      "icon": "build/icon.png",
+      "target": "dmg"
+    },
+    "afterPack": "afterPack.js",
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "P2Web",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "language": "1046",
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "P2Web-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "P2Web-Portable-${version}.${ext}"
+    }
+  }
+}

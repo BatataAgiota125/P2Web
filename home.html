@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>P2Web</title>
+<style>
+:root{--accent:#7c5cff;--accent2:color-mix(in oklab,var(--accent),#22d3ee 60%);--r:22px;--bg:#f4f2fc;--fg:#17162b;--mut:#6b6a85;--glass:rgba(255,255,255,.7);--bd:rgba(23,22,43,.12);--sh:0 12px 40px rgba(60,40,140,.14);--font:system-ui,"Segoe UI",Roboto,sans-serif}
+html[data-theme=dark]{--bg:#0a0a14;--fg:#ecebff;--mut:#9a98bd;--glass:rgba(26,25,48,.65);--bd:rgba(255,255,255,.12);--sh:0 12px 50px rgba(0,0,0,.55)}
+html[data-font=serifada]{--font:Georgia,"Times New Roman",serif}
+html[data-font=mono]{--font:ui-monospace,Consolas,"Courier New",monospace}
+html[data-font=arredondada]{--font:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
+html[data-shape=square]{--r:6px}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+#bg{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+#bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38}
+html[data-theme=dark] #bg i{opacity:.45}
+#bg i:nth-child(1){width:55vmax;height:55vmax;background:var(--accent);top:-22vmax;left:-12vmax;animation:a 22s ease-in-out infinite alternate}
+#bg i:nth-child(2){width:50vmax;height:50vmax;background:var(--accent2);right:-15vmax;bottom:-25vmax;animation:b 26s ease-in-out infinite alternate}
+#bg i:nth-child(3){width:28vmax;height:28vmax;background:color-mix(in oklab,var(--accent),#ff6bd6 55%);left:38%;top:42%;opacity:.22;animation:a 30s ease-in-out infinite alternate-reverse}
+@keyframes a{to{transform:translate(12vmax,8vmax) scale(1.15)}}@keyframes b{to{transform:translate(-10vmax,-9vmax) scale(.9)}}
+html[data-motion=off] #bg i{animation:none}
+html:not([data-bg=aurora]) #bg i{display:none}
+html[data-bg=grade] #bg{background:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 15%,transparent 75%)}
+html[data-bg=pontos] #bg{background:radial-gradient(var(--bd) 2px,transparent 2px) 0 0/28px 28px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 15%,transparent 75%)}
+.word{font-weight:800;letter-spacing:-.04em}.word i{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}
+.mk{display:block}
+header{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:16px 28px}
+.brand{display:flex;align-items:center;gap:10px;font-size:23px}
+.right{display:flex;align-items:center;gap:14px}
+.pill{display:flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--bd);border-radius:99px;padding:7px 14px;font-size:13px;color:var(--mut);backdrop-filter:blur(12px)}
+.dot{width:8px;height:8px;border-radius:50%;background:#2ecc71;animation:p 2s infinite}@keyframes p{50%{box-shadow:0 0 0 6px rgba(46,204,113,0)}0%{box-shadow:0 0 0 0 rgba(46,204,113,.6)}}
+.avatar{width:42px;height:42px;border-radius:50%;border:2px solid var(--accent);background:linear-gradient(135deg,var(--accent),var(--accent2));background-size:cover;background-position:center;color:#fff;font-weight:700;display:grid;place-items:center;cursor:pointer;padding:0;font-family:inherit;font-size:16px;flex:none}
+main{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:9vh 24px 70px;text-align:center}
+#hello{color:var(--mut);margin:0 0 8px;font-size:17px}
+h1{font-size:clamp(34px,5.5vw,56px);margin:0 0 30px;letter-spacing:-.04em;line-height:1.05}
+.search{display:flex;align-items:center;gap:12px;height:62px;padding:0 18px;background:var(--glass);border:1px solid var(--bd);border-radius:var(--r);backdrop-filter:blur(14px);box-shadow:var(--sh);max-width:640px;margin:0 auto}
+.search:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent),var(--sh)}
+.search input{flex:1;background:none;border:0;outline:0;color:var(--fg);font:inherit;font-size:19px;min-width:0}
+.chip{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);padding:4px 10px;border-radius:8px;font-size:13px;font-weight:700}
+kbd{border:1px solid var(--bd);border-radius:6px;padding:2px 8px;font-size:12px;color:var(--mut)}
+.st{height:24px;margin-top:12px;font-size:14px;color:var(--mut)}.ok{color:#1fa65a}.no{color:#e0475b}
+.row{display:flex;gap:12px;justify-content:center;margin-top:8px}
+.btn{background:var(--glass);border:1px solid var(--bd);color:var(--fg);padding:11px 20px;border-radius:calc(var(--r)*.6);cursor:pointer;font:inherit;font-size:14px;backdrop-filter:blur(10px)}
+.btn:hover{border-color:var(--accent)}.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}.wide{width:100%}
+section h3{text-align:left;color:var(--mut);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:38px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;text-align:left}
+.tile{display:flex;align-items:center;gap:12px;padding:14px;background:var(--glass);border:1px solid var(--bd);border-radius:var(--r);color:var(--fg);text-decoration:none;backdrop-filter:blur(10px);transition:.15s}
+.tile:hover{transform:translateY(-3px);border-color:var(--accent)}
+.tile .ic{width:42px;height:42px;border-radius:calc(var(--r)*.55);display:grid;place-items:center;font-weight:800;color:#fff;background:hsl(var(--h) 65% 52%);flex:none}
+.tile small{display:block;color:var(--mut);margin-top:2px}.empty{color:var(--mut);font-size:14px;margin:0;text-align:left}
+#menu{position:fixed;top:68px;right:28px;z-index:30;width:220px;background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh);padding:8px}
+#menu .who{padding:10px 12px;color:var(--mut);font-size:13px;border-bottom:1px solid var(--bd);margin-bottom:6px}
+#menu button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:10px 12px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer}
+#menu button:hover{background:color-mix(in srgb,var(--accent) 14%,transparent)}
+#scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:19}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:370px;max-width:100vw;z-index:20;background:var(--bg);border-left:1px solid var(--bd);padding:22px;overflow:auto;transform:translateX(105%);transition:transform .25s;text-align:left}
+#drawer.open{transform:none}#drawer h2{margin:0 0 4px}
+#drawer label,.lb{display:block;margin:20px 0 8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.seg{display:flex;border:1px solid var(--bd);border-radius:calc(var(--r)*.6);overflow:hidden}
+.seg button{flex:1;background:none;border:0;color:var(--mut);padding:9px 4px;cursor:pointer;font:inherit;font-size:13px}.seg button.on{background:var(--accent);color:#fff}
+.sw{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sw button{width:30px;height:30px;border-radius:50%;border:0;cursor:pointer}.sw button.on{outline:3px solid var(--fg);outline-offset:2px}
+.sw input{width:34px;height:30px;border:0;background:none;padding:0;cursor:pointer}
+.prof{display:flex;gap:14px;align-items:center}.prof .avatar{width:68px;height:68px;font-size:26px;cursor:default}
+.in{width:100%;margin:6px 0;padding:12px 14px;border:1px solid var(--bd);border-radius:calc(var(--r)*.6);background:rgba(128,128,128,.08);color:var(--fg);font:inherit;outline:0}
+.in:focus{border-color:var(--accent)}
+.tg{display:flex;justify-content:space-between;align-items:center;margin:12px 0;font-size:14px}.tg input{accent-color:var(--accent);width:18px;height:18px}
+.note{color:var(--mut);font-size:13px;margin:8px 0}
+#auth{position:relative;z-index:2;min-height:100vh;display:grid;place-items:center;padding:20px}
+.card{width:min(420px,94vw);background:var(--glass);border:1px solid var(--bd);border-radius:calc(var(--r) + 8px);box-shadow:var(--sh);backdrop-filter:blur(18px);padding:32px 30px;text-align:center}
+.card .brand{justify-content:center;font-size:34px;margin-bottom:6px}.card p.tag{color:var(--mut);margin:0 0 20px;font-size:14px}
+.accts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.acct{background:none;border:0;color:var(--fg);cursor:pointer;font:inherit;font-size:12px;display:grid;gap:4px;justify-items:center;max-width:78px}
+.acct .avatar{width:48px;height:48px;cursor:pointer}.acct span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:78px}
+.card .seg{margin-bottom:10px}.or{color:var(--mut);font-size:12px;margin:14px 0}
+dialog{border:1px solid var(--bd);border-radius:calc(var(--r) + 4px);width:min(620px,94vw);background:var(--bg);color:var(--fg);font-family:var(--font)}
+dialog::backdrop{background:rgba(0,0,0,.5)}textarea.in{height:140px;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.ar{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd);font-size:14px;flex-wrap:wrap}.ar>span{flex:1;min-width:160px}.ar .btn{padding:6px 10px;font-size:12px}#dadm{max-height:90vh}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"/><stop offset="1" style="stop-color:var(--accent2)"/></linearGradient>
+<symbol id="mark" viewBox="0 0 96 96"><rect width="96" height="96" rx="26" fill="url(#lg)"/><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"><path d="M34 26V72M34 26H52a14 14 0 0 1 0 28H34" stroke-width="9"/><path d="M34 72L66 66" stroke-width="4" opacity=".75"/></g><circle cx="70" cy="65" r="6.5" fill="#fff"/></symbol>
+</defs></svg>
+<div id="bg"><i></i><i></i><i></i></div>
+
+<div id="auth" hidden><div class="card">
+  <div class="brand"><svg class="mk" width="52" height="52"><use href="#mark"/></svg><span class="word">P<i>2</i>Web</span></div>
+  <p class="tag">Sites que vivem na rede, não em servidores.</p>
+  <div class="accts" id="accts"></div>
+  <div class="seg"><button data-m="in" class="on">Entrar</button><button data-m="up">Criar conta</button></div>
+  <input class="in" id="au" placeholder="Usuário" autocomplete="off">
+  <input class="in" id="ad" placeholder="Nome de exibição" hidden>
+  <input class="in" id="ap" type="password" placeholder="Senha">
+  <div class="st no" id="aerr"></div>
+  <button class="btn primary wide" id="asub">Entrar</button>
+  <div class="or">— ou —</div>
+  <button class="btn wide" id="guest">Continuar como convidado</button>
+  <p class="note">Convidados navegam livremente, mas não publicam sites nem salvam personalização.</p>
+</div></div>
+
+<div id="app" hidden>
+  <header>
+    <div class="brand"><svg class="mk" width="36" height="36"><use href="#mark"/></svg><span class="word">P<i>2</i>Web</span></div>
+    <div class="right"><span class="pill"><b class="dot"></b><span id="net">…</span></span><button class="avatar" id="avBtn"></button></div>
+  </header>
+  <main>
+    <p id="hello"></p>
+    <h1>Para onde vamos?</h1>
+    <div class="search"><input id="q" autofocus autocomplete="off" placeholder="Digite um endereço…"><span class="chip">.p2p</span><kbd>↵</kbd></div>
+    <div class="st" id="st"></div>
+    <div class="row"><button class="btn primary" id="open">Abrir</button><button class="btn" id="pub">Publicar aqui</button></div>
+    <section><h3>Seus sites</h3><div class="grid" id="mine"></div><h3>Descobertos na rede</h3><div class="grid" id="others"></div></section>
+  </main>
+</div>
+
+<div id="menu" hidden><div class="who" id="mwho"></div><button id="mset">Personalizar</button><button id="mpw" hidden>Alterar senha</button><button id="madm" hidden>Painel admin</button><button id="mout">Sair</button></div>
+<div id="scrim" hidden></div>
+<aside id="drawer">
+  <h2>Personalizar</h2><p class="note" id="gnote" hidden>Você é convidado: as mudanças valem só nesta sessão. Saia e crie uma conta para salvar.</p>
+  <span class="lb">Perfil</span>
+  <div class="prof"><div class="avatar" id="avBig"></div><div>
+    <button class="btn" id="chg">Trocar foto</button> <button class="btn" id="rem">Remover</button>
+    <input type="file" id="file" accept="image/*" hidden></div></div>
+  <input class="in" id="name" maxlength="30" placeholder="Nome de exibição">
+  <span class="lb">Tema</span><div class="seg" data-k="theme"><button data-v="auto">Auto</button><button data-v="light">Claro</button><button data-v="dark">Escuro</button></div>
+  <span class="lb">Cor de destaque</span><div class="sw" id="sw"></div>
+  <span class="lb">Fundo</span><div class="seg" data-k="bg"><button data-v="aurora">Aurora</button><button data-v="grade">Grade</button><button data-v="pontos">Pontos</button><button data-v="liso">Liso</button></div>
+  <span class="lb">Fonte</span><div class="seg" data-k="font"><button data-v="moderna">Moderna</button><button data-v="serifada">Serifa</button><button data-v="mono">Mono</button><button data-v="arredondada">Suave</button></div>
+  <span class="lb">Formato</span><div class="seg" data-k="shape"><button data-v="round">Arredondado</button><button data-v="square">Reto</button></div>
+  <div class="lb">Extras</div>
+  <label class="tg" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--fg)">Mostrar saudação <input type="checkbox" data-k="greeting"></label>
+  <label class="tg" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--fg)">Animações de fundo <input type="checkbox" data-k="motion"></label>
+</aside>
+
+<dialog id="dlg"><h3 style="margin-top:0">Publicar site</h3>
+  <span class="lb">Endereço (.p2p)</span><input class="in" id="pn">
+  <span class="lb">Opção 1: pasta do site (precisa de index.html)</span>
+  <div><button class="btn" id="pick">Escolher pasta…</button> <span id="dir" class="note"></span></div>
+  <span class="lb">Opção 2: ou escreva o código</span><textarea class="in" id="code"></textarea>
+  <div class="row" style="justify-content:flex-end"><button class="btn" id="cancel">Cancelar</button><button class="btn primary" id="go">Publicar</button></div>
+  <div class="st" id="pm"></div>
+</dialog>
+
+<dialog id="dpw"><h3 style="margin-top:0">Alterar senha</h3>
+  <input class="in" id="pw0" type="password" placeholder="Senha atual"><input class="in" id="pw1" type="password" placeholder="Nova senha (mín. 6)"><input class="in" id="pw2" type="password" placeholder="Repita a nova senha">
+  <div class="row" style="justify-content:flex-end"><button class="btn" id="pwc">Fechar</button><button class="btn primary" id="pws">Salvar</button></div><div class="st" id="pwm"></div></dialog>
+<dialog id="dadm"><h3 style="margin-top:0">Painel admin</h3>
+  <p class="note">Poderes locais: valem só neste computador. Não dá para apagar sites dos outros pares da rede.</p>
+  <span class="lb">Contas</span><div id="al"></div><span class="lb">Sites neste computador</span><div id="as"></div><span class="lb">Bloqueados</span><div id="ab"></div>
+  <div class="row" style="justify-content:flex-end"><button class="btn" id="adu">Publicar atualização do app…</button><button class="btn" id="adc">Fechar</button></div></dialog>
+<script>
+const $=id=>document.getElementById(id),R=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const COLORS=['#7c5cff','#2f80ff','#14b8a6','#22c55e','#f59e0b','#f43f5e','#ec4899'];
+let S,mode='in',dir=null,t1,t2;
+
+function apply(s){R.dataset.theme=s.theme==='auto'?(mq.matches?'dark':'light'):s.theme;R.dataset.bg=s.bg;R.dataset.font=s.font;R.dataset.shape=s.shape;R.dataset.motion=s.motion?'on':'off';R.style.setProperty('--accent',s.accent)}
+mq.onchange=()=>S&&apply(S.settings);
+const av=(el,name,img)=>{el.style.backgroundImage=img?`url(${img})`:'';el.textContent=img?'':(name||'?')[0].toUpperCase()};
+const paintAv=()=>{av($('avBtn'),S.name,S.avatar);av($('avBig'),S.name,S.avatar)};
+function hello(){const h=new Date().getHours(),g=h<5?'Boa madrugada':h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
+  $('hello').textContent=S.state==='guest'?`${g}, visitante`:`${g}, ${S.name.split(' ')[0]}`;$('hello').style.display=S.settings.greeting?'':'none'}
+
+async function boot(){
+  S=await p2p.session();apply(S.settings);const none=S.state==='none';$('auth').hidden=!none;$('app').hidden=none;
+  if(none){$('accts').innerHTML='';(await p2p.accounts()).forEach(x=>{const b=document.createElement('button'),d=document.createElement('div'),s=document.createElement('span');
+    b.className='acct';d.className='avatar';av(d,x.displayName,x.avatar);s.textContent=x.displayName;b.append(d,s);
+    b.onclick=()=>{setMode('in');$('au').value=x.username;$('ap').focus()};$('accts').append(b)});return}
+  paintAv();hello();sync();load();
+}
+// ----- login -----
+function setMode(m){mode=m;$('ad').hidden=m==='in';$('asub').textContent=m==='in'?'Entrar':'Criar conta';document.querySelectorAll('.card .seg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));$('aerr').textContent=''}
+document.querySelectorAll('.card .seg button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+async function submit(){const r=mode==='in'?await p2p.login($('au').value,$('ap').value):await p2p.register($('au').value,$('ad').value,$('ap').value);
+  if(r.error)$('aerr').textContent=r.error;else{$('ap').value='';boot()}}
+$('asub').onclick=submit;$('ap').onkeydown=e=>{if(e.key==='Enter')submit()};
+$('guest').onclick=async()=>{await p2p.guest();boot()};
+// ----- menu / gaveta -----
+$('avBtn').onclick=e=>{e.stopPropagation();$('mwho').textContent=S.state==='guest'?'Convidado':`${S.name} · @${S.username}`;$('mout').textContent=S.state==='guest'?'Entrar / criar conta':'Sair';$('mpw').hidden=S.state!=='user';$('madm').hidden=!S.admin;$('menu').hidden=!$('menu').hidden};
+document.onclick=()=>$('menu').hidden=true;
+const drawer=o=>{$('drawer').classList.toggle('open',o);$('scrim').hidden=!o};
+$('mset').onclick=()=>drawer(true);$('scrim').onclick=()=>drawer(false);
+$('mout').onclick=async()=>{await p2p.logout();drawer(false);boot()};
+document.querySelectorAll('.seg[data-k]').forEach(g=>g.onclick=e=>{if(e.target.dataset.v)set(g.dataset.k,e.target.dataset.v)});
+document.querySelectorAll('input[data-k]').forEach(i=>i.onchange=()=>set(i.dataset.k,i.checked));
+$('sw').innerHTML=COLORS.map(c=>`<button data-c="${c}" style="background:${c}"></button>`).join('')+'<input type="color" id="cc" title="Cor personalizada">';
+$('sw').onclick=e=>{if(e.target.dataset.c)set('accent',e.target.dataset.c)};$('cc').oninput=e=>set('accent',e.target.value);
+function set(k,v){S.settings[k]=v;apply(S.settings);sync();hello();clearTimeout(t1);t1=setTimeout(()=>p2p.save({settings:S.settings}),300)}
+function sync(){const s=S.settings;document.querySelectorAll('.seg[data-k]').forEach(g=>[...g.children].forEach(b=>b.classList.toggle('on',b.dataset.v===s[g.dataset.k])));
+  document.querySelectorAll('#sw button').forEach(b=>b.classList.toggle('on',b.dataset.c===s.accent));$('cc').value=s.accent;
+  document.querySelectorAll('input[data-k]').forEach(i=>i.checked=!!s[i.dataset.k]);
+  const g=S.state==='guest';$('gnote').hidden=!g;['chg','rem','name'].forEach(i=>$(i).disabled=g);$('name').value=S.name||''}
+$('name').onchange=async()=>{const v=$('name').value.trim();if(!v)return;await p2p.save({displayName:v});S.name=v;paintAv();hello()};
+$('chg').onclick=()=>$('file').click();
+$('rem').onclick=async()=>{await p2p.save({avatar:null});S.avatar=null;paintAv()};
+$('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;
+  const d=await new Promise((ok,er)=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=192;const m=Math.min(im.width,im.height);
+    c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,192,192);URL.revokeObjectURL(im.src);ok(c.toDataURL('image/jpeg',.85))};im.onerror=er;im.src=URL.createObjectURL(f)});
+  if((await p2p.save({avatar:d})).ok){S.avatar=d;paintAv()}e.target.value=''};
+// ----- busca / publicar -----
+const norm=()=>$('q').value.trim().toLowerCase().replace(/\.p2p$/,'');
+async function check(){const n=norm(),s=$('st');if(!n){s.textContent='';return}const r=await p2p.check(n);
+  s.innerHTML=!r.valid?'<span class="no">Use apenas a-z, 0-9 e hífen</span>':r.mine?'<span class="ok">● Este endereço é seu — publicar atualiza o site</span>':r.free?'<span class="ok">● Livre — você pode publicar aqui</span>':'<span class="no">● Ocupado</span>'}
+$('q').oninput=()=>{clearTimeout(t2);t2=setTimeout(check,250)};
+const go=()=>{const n=norm();if(n)location.href='p2p://'+n+'/'};
+$('open').onclick=go;$('q').onkeydown=e=>{if(e.key==='Enter')go()};
+$('code').value='<!doctype html>\n<h1>Olá, mundo P2P!</h1>\n<script>document.body.append("JS funcionando: "+new Date())<\/script>';
+$('pub').onclick=()=>{if(S.state==='guest'){$('st').innerHTML='<span class="no">Convidados não publicam. Use o menu do perfil → Entrar / criar conta.</span>';return}
+  $('pn').value=norm();$('pm').textContent='';dir=null;$('dir').textContent='';$('dlg').showModal()};
+$('cancel').onclick=()=>$('dlg').close();
+$('pick').onclick=async()=>{const d=await p2p.pickFolder();if(d){dir=d;$('dir').textContent=d}};
+$('go').onclick=async()=>{const n=$('pn').value.trim().toLowerCase(),r=await p2p.publish(n,{dir,code:$('code').value});
+  $('pm').innerHTML=r.ok?`<span class="ok">Publicado (v${r.version})! <a href="p2p://${esc(n)}/" style="color:var(--accent)">Abrir</a></span>`:`<span class="no">${esc(r.error)}</span>`;if(r.ok)load()};
+async function load(){const [s,l]=await Promise.all([p2p.status(),p2p.sites()]);
+  $('net').textContent=`${s.peers} ${s.peers==1?'par':'pares'} · ${s.sites} ${s.sites==1?'site':'sites'}`;
+  const t=x=>`<a class="tile" href="p2p://${x.name}/"><span class="ic" style="--h:${[...x.name].reduce((a,c)=>a+c.charCodeAt(0)*7,0)%360}">${x.name[0].toUpperCase()}</span><span><b>${x.name}.p2p</b><small>v${x.version}</small></span></a>`;
+  $('mine').innerHTML=l.filter(x=>x.mine).map(t).join('')||'<p class="empty">Você ainda não publicou nada.</p>';
+  $('others').innerHTML=l.filter(x=>!x.mine).map(t).join('')||'<p class="empty">Nenhum site de outros pares ainda.</p>'}
+setInterval(()=>{if(S&&S.state!=='none')load()},5000);
+$('mpw').onclick=()=>{['pw0','pw1','pw2'].forEach(i=>$(i).value='');$('pwm').textContent='';$('dpw').showModal()};
+$('pwc').onclick=()=>$('dpw').close();
+$('pws').onclick=async()=>{if($('pw1').value!==$('pw2').value){$('pwm').innerHTML='<span class="no">As senhas novas não coincidem.</span>';return}
+  const r=await p2p.changePassword($('pw0').value,$('pw1').value);
+  $('pwm').innerHTML=r.ok?'<span class="ok">Senha alterada!</span>':`<span class="no">${esc(r.error)}</span>`;if(r.ok)['pw0','pw1','pw2'].forEach(i=>$(i).value='')};
+async function adm(){const [u,s]=await Promise.all([p2p.adminUsers(),p2p.adminSites()]);
+  $('al').innerHTML=u.map(x=>`<div class="ar"><span><b>${esc(x.displayName)}</b> @${esc(x.username)} ${x.admin?'<span class="chip">admin</span>':''} · ${x.sites} site(s)</span>${x.me?'<small>você</small>':`<button class="btn" data-a="adm" data-u="${esc(x.username)}" data-v="${x.admin?0:1}">${x.admin?'Tirar admin':'Tornar admin'}</button><button class="btn" data-a="del" data-u="${esc(x.username)}">Excluir</button>`}</div>`).join('');
+  $('as').innerHTML=s.sites.map(x=>`<div class="ar"><span><b>${esc(x.name)}.p2p</b> v${x.version} · ${x.kb} KB · ${esc(x.owner)}</span><button class="btn" data-a="rm" data-n="${esc(x.name)}">Remover</button><button class="btn" data-a="bl" data-n="${esc(x.name)}">Remover e bloquear</button></div>`).join('')||'<p class="empty">Nenhum site.</p>';
+  $('ab').innerHTML=s.blocked.map(n=>`<div class="ar"><span>${esc(n)}.p2p</span><button class="btn" data-a="ub" data-n="${esc(n)}">Desbloquear</button></div>`).join('')||'<p class="empty">Nenhum bloqueio.</p>'}
+$('madm').onclick=()=>{adm();$('dadm').showModal()};$('adc').onclick=()=>$('dadm').close();
+$('dadm').onclick=async e=>{const d=e.target.dataset;if(!d.a)return;let r={};
+  if(d.a==='adm')r=await p2p.adminSetAdmin(d.u,!!+d.v);
+  else if(d.a==='del'){if(!confirm('Excluir a conta @'+d.u+' e os sites dela deste computador?'))return;r=await p2p.adminRemoveUser(d.u,true)}
+  else if(d.a==='rm'){if(!confirm('Remover '+d.n+'.p2p deste computador? Se outro par o tiver, ele volta.'))return;r=await p2p.adminRemoveSite(d.n,false)}
+  else if(d.a==='bl'){if(!confirm('Remover e bloquear '+d.n+'.p2p neste computador?'))return;r=await p2p.adminRemoveSite(d.n,true)}
+  else if(d.a==='ub')r=await p2p.adminUnblock(d.n);
+  if(r.error)alert(r.error);adm();load()};
+$('adu').onclick=async()=>{const r=await p2p.adminPublishUpdate();if(r.error)alert(r.error);else if(r.ok)alert('Atualização publicada na rede! Quem estiver online (ou se conectar depois) recebe.')};
+boot();
+</script></body></html>
